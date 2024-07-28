@@ -1,16 +1,19 @@
 package com.life.plus.tv.data.repo
 
-import com.life.plus.tv.data.data_source.local.entity.UserEntity
 import com.life.plus.tv.data.data_source.local.room.UserDao
 import com.life.plus.tv.data.data_source.remote.dto.SearchInfoDto
+import com.life.plus.tv.domain.ErrorType
 import com.life.plus.tv.domain.RequestState
 import com.life.plus.tv.domain.model.SearchInfo
+import com.life.plus.tv.domain.model.UserInfo
 import com.life.plus.tv.domain.repo.MainRepo
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.http.isSuccess
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -18,10 +21,34 @@ class MainRepoImpl @Inject constructor(
     private val ktorClient: HttpClient,
     private val userDao: UserDao
 ) : MainRepo {
-    override fun getUser(userName: String) = userDao.getUser(userName)
-    override fun getLoggedInUser() = userDao.getLoggedInUser()
-    override fun updateLoginStatus(userName: String, isLogin: Boolean) = userDao.updateLoginStatus(userName, isLogin)
-    override fun addUser(product: UserEntity) = userDao.addUser(product)
+    override suspend fun login(userName: String, password: String): RequestState<UserInfo> {
+        return withContext(Dispatchers.IO) {
+            val user = userDao.getUser(userName)
+            if (user == null)
+                RequestState.Error("User doesn't exist", ErrorType.InvalidUserName)
+            else if (user.password != password)
+                RequestState.Error("Password didn't matched", ErrorType.InvalidPass)
+            else {
+                userDao.updateLoginStatus(userName, true)
+                RequestState.Success(user.toUserInfo())
+            }
+        }
+    }
+
+    override suspend fun register(userInfo: UserInfo): RequestState<String> =
+        withContext(Dispatchers.IO) {
+            if (userDao.addUser(userInfo.toUserEntity()) == null)
+                RequestState.Error("User Name already taken", ErrorType.InvalidUserName)
+            else
+                RequestState.Success("Registration Successful")
+        }
+
+
+    override suspend fun getLoggedInUser(): Flow<UserInfo?> =
+        withContext(Dispatchers.IO) { userDao.getLoggedInUser().map { it?.toUserInfo() } }
+
+    override suspend fun updateLoginStatus(userName: String, isLogin: Boolean) =
+        withContext(Dispatchers.IO) { userDao.updateLoginStatus(userName, isLogin) }
 
     override suspend fun getShows(query: String): RequestState<List<SearchInfo>> {
         return withContext(Dispatchers.IO) {

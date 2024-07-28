@@ -1,14 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.screen.LoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/inputLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="?attr/textInputOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:autofillHints="username"
+            android:hint="@string/user_name"
+            app:boxBackgroundColor="@color/white"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusTopStart="16dp"
+            app:boxStrokeWidth=".4dp"
+            app:boxStrokeWidthFocused="1dp"
+            app:errorEnabled="true"
+            app:placeholderText="Enter User Id"
+            app:placeholderTextColor="@color/gray">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/userName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:nextFocusForward="@id/pass"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="?attr/textInputOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:autofillHints="password"
+            android:hint="@string/password"
+            app:boxBackgroundColor="@color/white"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusTopStart="16dp"
+            app:boxStrokeWidth=".4dp"
+            app:boxStrokeWidthFocused="1dp"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@null"
+            app:passwordToggleEnabled="true"
+            app:placeholderText="Enter Password"
+            app:placeholderTextColor="@color/gray">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionNext"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:nextFocusForward="@id/pass"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_42sdp"
+            android:layout_margin="10dp"
+            android:text="@string/sign_in"
+            android:textSize="@dimen/_14ssp"
+            app:cornerRadius="16dp" />
+
+
+    </LinearLayout>
 
 </FrameLayout>

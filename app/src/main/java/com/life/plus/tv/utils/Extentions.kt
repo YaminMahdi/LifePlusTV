@@ -3,9 +3,11 @@ package com.life.plus.tv.utils
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -118,5 +120,40 @@ fun NavController.navigateSafe(@IdRes resId: Int, args: Bundle? = null) {
                     navigate(resId, args)
             }
         }
+    }
+}
+
+/**
+ * Navigate to a destination safely, handling cases where the destination cannot be found.
+ *
+ * @param resId The resource ID of the destination to navigate to.
+ * @param args Arguments to pass to the destination.
+ */
+context(AppCompatActivity)
+fun NavController.navigateSafe(@IdRes resId: Int, args: Bundle? = null) {
+    // Get the destination ID from the action associated with the given resource ID.
+    val destinationId = currentDestination?.getAction(resId)?.destinationId ?: 0
+    // Get the current navigation node.
+    currentDestination?.let { node ->
+        // Determine the parent node, which is either the NavGraph or the parent of the current destination.
+        val currentNode = when (node) {
+            is NavGraph -> node
+            else -> node.parent
+        }
+        // If the destination ID is valid, find the destination node and navigate to it.
+        if (destinationId != 0) {
+            currentNode?.findNode(destinationId)?.let {
+                if (this@AppCompatActivity.lifecycle.currentState == Lifecycle.State.RESUMED)
+                    navigate(resId, args)
+            }
+        }
+    }
+}
+
+
+context(Fragment)
+fun String.showToast(){
+    context?.let {
+        Toast.makeText( it,this, Toast.LENGTH_SHORT).show()
     }
 }

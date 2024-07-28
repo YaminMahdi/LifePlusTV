@@ -54,6 +54,9 @@ dependencies {
 
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.navigation.ui.ktx)
+    implementation(libs.sdp.android)
+    implementation(libs.ssp.android)
+
 
     //Dagger - Hilt
     implementation(libs.hilt.android)
@@ -70,8 +73,12 @@ dependencies {
 
     //room
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
 
     //Custom Tabs
     implementation(libs.androidx.browser)
+
+    implementation(libs.lifecyklelog)
+
 }

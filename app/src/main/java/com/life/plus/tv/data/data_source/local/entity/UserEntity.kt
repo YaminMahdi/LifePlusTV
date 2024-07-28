@@ -9,8 +9,8 @@ data class UserEntity(
     @PrimaryKey(autoGenerate = false)
     val userName: String = "",
     val name: String = "",
-    val password: String = "",
     val phone: String = "",
+    val password: String = "",
     val isLogin: Boolean = false
 ){
     fun toUserInfo()=
