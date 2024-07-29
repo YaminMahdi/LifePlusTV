@@ -144,7 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="18dp"
             android:maxLines="1"
-            android:text="TV"
+            android:text="@string/tv"
             android:textColor="@color/white"
             android:textSize="@dimen/_9ssp"
             android:textStyle="bold"

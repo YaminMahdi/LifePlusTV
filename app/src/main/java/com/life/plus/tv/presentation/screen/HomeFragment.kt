@@ -1,17 +1,15 @@
 package com.life.plus.tv.presentation.screen
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.life.plus.tv.R
 import com.life.plus.tv.databinding.FragmentHomeBinding
-import com.life.plus.tv.databinding.FragmentLoginBinding
 import com.life.plus.tv.presentation.MainViewModel
 import com.life.plus.tv.presentation.ShowAdapter
 import com.life.plus.tv.utils.closeKeyboard
@@ -63,13 +61,14 @@ class HomeFragment : Fragment() {
             }
         }
         viewModel.searchList.collectWithLifecycle {
-            showAdapter.submitList(it)
-            if (it.isEmpty()) {
-                binding.noHistory.text = getString(R.string.no_shows_found)
-                binding.noHistory.visible()
+            it?.let {
+                showAdapter.submitList(it)
+                if (it.isEmpty()) {
+                    binding.noHistory.text = getString(R.string.no_shows_found)
+                    binding.noHistory.visible()
+                } else
+                    binding.noHistory.gone()
             }
-            else
-                binding.noHistory.gone()
             binding.progressBar.invisible()
             activity?.closeKeyboard()
         }

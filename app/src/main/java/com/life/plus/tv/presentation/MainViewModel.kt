@@ -32,7 +32,7 @@ class MainViewModel @Inject constructor(
     val loginInfo = MutableSharedFlow<RequestState<UserInfo>>()
     val regInfo = MutableSharedFlow<RequestState<String>>()
 
-    val searchList = savedStateHandle.getStateFlow<List<ShowInfo>>("searchList", listOf())
+    val searchList = savedStateHandle.getStateFlow<List<ShowInfo>?>("searchList", null)
 
     init {
         viewModelScope.launch {

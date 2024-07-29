@@ -16,7 +16,6 @@ import com.life.plus.tv.presentation.MainViewModel
 import com.life.plus.tv.utils.collectWithLifecycle
 import com.life.plus.tv.utils.navigateSafe
 import com.life.plus.tv.utils.setBounceClickListener
-import com.life.plus.tv.utils.showToast
 
 
 class LoginFragment : Fragment() {

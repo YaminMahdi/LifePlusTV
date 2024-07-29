@@ -15,4 +15,6 @@
     <string name="no_shows_found">No Shows Found</string>
     <string name="_10">/10</string>
     <string name="premiered">Premiered:</string>
+    <string name="fill_up_this_form_to_register">Fill up this form to register.</string>
+    <string name="tv">TV</string>
 </resources>

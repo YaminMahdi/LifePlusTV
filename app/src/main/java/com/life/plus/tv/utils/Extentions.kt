@@ -4,7 +4,6 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
@@ -14,7 +13,6 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -24,7 +22,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph
 import coil.imageLoader
 import coil.request.ImageRequest
-import com.life.plus.tv.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -193,18 +190,6 @@ fun View.invisible(){
     visibility = View.INVISIBLE
 }
 
-fun Activity.setSystemBarAppearance(
-    statusBarColor: Int,
-    navigationBarColor: Int,
-    isAppearanceLightStatusBars: Boolean,
-    isAppearanceLightNavigationBars: Boolean
-) {
-    window.statusBarColor = ContextCompat.getColor(this, statusBarColor)
-    window.navigationBarColor = ContextCompat.getColor(this, navigationBarColor)
-    val windowInsetController = WindowCompat.getInsetsController(window, window.decorView)
-    windowInsetController.isAppearanceLightStatusBars = isAppearanceLightStatusBars
-    windowInsetController.isAppearanceLightNavigationBars = isAppearanceLightNavigationBars
-}
 
 fun Activity?.setStatusAppearance(isLight: Boolean) {
     if(this == null) return

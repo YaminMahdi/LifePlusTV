@@ -1,6 +1,5 @@
 package com.life.plus.tv.data.repo
 
-import android.database.SQLException
 import com.life.plus.tv.data.data_source.local.room.UserDao
 import com.life.plus.tv.data.data_source.remote.dto.SearchInfoDto
 import com.life.plus.tv.domain.ErrorType

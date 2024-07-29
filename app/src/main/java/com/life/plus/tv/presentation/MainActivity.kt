@@ -1,15 +1,12 @@
 package com.life.plus.tv.presentation
 
 import android.os.Bundle
-import android.view.ViewGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.setPadding
 import androidx.navigation.findNavController
 import com.life.plus.tv.R
 import com.life.plus.tv.databinding.ActivityMainBinding
@@ -50,7 +47,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupObserver() {
-        var userNull = null
         viewModel.currentUser
             .distinctUntilChanged()
             .collectWithLifecycle {

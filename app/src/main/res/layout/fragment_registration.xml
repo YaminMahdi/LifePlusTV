@@ -52,7 +52,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:maxLines="1"
-                android:text="Fill up this form to register."
+                android:text="@string/fill_up_this_form_to_register"
                 android:textColor="@color/blueLight"
                 android:textSize="@dimen/_11ssp"
                 android:textStyle="bold" />
