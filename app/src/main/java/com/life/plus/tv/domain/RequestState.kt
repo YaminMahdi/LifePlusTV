@@ -9,7 +9,7 @@ sealed class RequestState<out T> : Parcelable {
     data object Idle : RequestState<Nothing>()
     data object Loading : RequestState<Nothing>()
     data class Success<T>(val data: @RawValue T) : RequestState<T>()
-    data class Error(val error: String, val code: ErrorType = ErrorType.None) :
+    data class Error(val error: String, val type: ErrorType = ErrorType.None) :
         RequestState<Nothing>()
 }
 
@@ -19,5 +19,6 @@ enum class ErrorType {
     InvalidUserName,
     InvalidName,
     InvalidPhone,
-    InvalidPass
+    InvalidPass,
+    InvalidRePass
 }

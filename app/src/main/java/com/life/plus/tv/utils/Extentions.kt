@@ -157,3 +157,8 @@ fun String.showToast(){
         Toast.makeText( it,this, Toast.LENGTH_SHORT).show()
     }
 }
+
+fun String.isValidUsername(): Boolean {
+    val regex = "^[a-zA-Z_][a-zA-Z0-9_]{1,19}$".toRegex()
+    return regex.matches(this)
+}

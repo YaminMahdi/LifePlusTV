@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.life.plus.tv.R
 import com.life.plus.tv.databinding.FragmentLoginBinding
 import com.life.plus.tv.domain.RequestState
 import com.life.plus.tv.presentation.MainViewModel
 import com.life.plus.tv.utils.collectWithLifecycle
+import com.life.plus.tv.utils.navigateSafe
 import com.life.plus.tv.utils.setBounceClickListener
 import com.life.plus.tv.utils.showToast
 
@@ -22,6 +26,8 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        container?.clipChildren = false
+        container?.clipToPadding = false
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -40,13 +46,17 @@ class LoginFragment : Fragment() {
         viewModel.loginInfo.collectWithLifecycle {
             if(it is RequestState.Error)
                 it.error.showToast()
-
         }
     }
 
     private fun setupListener() {
-        binding.btnLogin.setBounceClickListener {
-            viewModel.login(binding.userName.text.toString(), binding.pass.text.toString())
+        binding.apply {
+            btnLogin.setBounceClickListener {
+                viewModel.login(binding.userName.text.toString(), binding.pass.text.toString())
+            }
+            btnSignUp.setBounceClickListener {
+                findNavController().navigateSafe(R.id.action_navLogin_to_navRegistration)
+            }
         }
     }
 }

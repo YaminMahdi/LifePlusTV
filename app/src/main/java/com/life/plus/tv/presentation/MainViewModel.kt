@@ -9,7 +9,6 @@ import com.life.plus.tv.domain.repo.MainRepo
 import com.life.plus.tv.domain.use_cases.AuthUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,6 +21,7 @@ class MainViewModel @Inject constructor(
 
     val currentUser = savedStateHandle.getStateFlow<UserInfo?>("currentUser",null)
     val loginInfo = MutableSharedFlow<RequestState<UserInfo>>()
+    val regInfo = MutableSharedFlow<RequestState<String>>()
 
     init {
         viewModelScope.launch {
@@ -37,5 +37,13 @@ class MainViewModel @Inject constructor(
             loginInfo.emit(authUseCases.login(userName, password))
         }
     }
+
+    fun register(userInfo: UserInfo, rePass: String){
+        viewModelScope.launch {
+            regInfo.emit(authUseCases.register(userInfo, rePass))
+        }
+    }
+
+    suspend fun isUserNameExist(userName: String)= repo.getUser(userName) != null
 
 }

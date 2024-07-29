@@ -2,8 +2,19 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.LifePlusTV" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/blue</item>
+<!--        <item name="android:statusBarColor">@color/blueLightMore</item>-->
+<!--        <item name="android:navigationBarColor">@color/blueLightMore</item>-->
+        <item name="android:windowBackground">@color/blueLightMore</item>
     </style>
 
     <style name="Theme.LifePlusTV" parent="Base.Theme.LifePlusTV" />
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/blueLightMore</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_small</item>
+        <item name="postSplashScreenTheme">@style/Theme.LifePlusTV</item>
+        <item name="android:windowSplashScreenBehavior" tools:targetApi="33">icon_preferred</item>
+    </style>
+
 </resources>

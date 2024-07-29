@@ -4,7 +4,7 @@ import com.life.plus.tv.data.data_source.local.room.UserDao
 import com.life.plus.tv.data.data_source.remote.dto.SearchInfoDto
 import com.life.plus.tv.domain.ErrorType
 import com.life.plus.tv.domain.RequestState
-import com.life.plus.tv.domain.model.SearchInfo
+import com.life.plus.tv.domain.model.ShowInfo
 import com.life.plus.tv.domain.model.UserInfo
 import com.life.plus.tv.domain.repo.MainRepo
 import io.ktor.client.HttpClient
@@ -47,17 +47,20 @@ class MainRepoImpl @Inject constructor(
     override suspend fun getLoggedInUser(): Flow<UserInfo?> =
         withContext(Dispatchers.IO) { userDao.getLoggedInUser().map { it?.toUserInfo() } }
 
+    override suspend fun getUser(userName: String): UserInfo? =
+        withContext(Dispatchers.IO) { userDao.getUser(userName)?.toUserInfo() }
+
     override suspend fun updateLoginStatus(userName: String, isLogin: Boolean) =
         withContext(Dispatchers.IO) { userDao.updateLoginStatus(userName, isLogin) }
 
-    override suspend fun getShows(query: String): RequestState<List<SearchInfo>> {
+    override suspend fun getShows(query: String): RequestState<List<ShowInfo>> {
         return withContext(Dispatchers.IO) {
             try {
                 val response = ktorClient.get("search/shows?q=$query")
                 if (response.status.isSuccess()) {
                     val body = response
                         .body<List<SearchInfoDto>>()
-                        .map { it.toSearchInfo() }
+                        .map { it.toShowInfo() }
                     RequestState.Success(body)
                 } else
                     RequestState.Error(response.status.description)

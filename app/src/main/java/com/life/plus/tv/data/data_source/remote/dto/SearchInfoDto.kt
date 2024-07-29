@@ -2,7 +2,7 @@ package com.life.plus.tv.data.data_source.remote.dto
 
 
 import com.google.gson.annotations.SerializedName
-import com.life.plus.tv.domain.model.SearchInfo
+import com.life.plus.tv.domain.model.ShowInfo
 
 data class SearchInfoDto(
     @SerializedName("score")
@@ -145,7 +145,7 @@ data class SearchInfoDto(
         }
     }
 
-    fun toSearchInfo()= SearchInfo(
+    fun toShowInfo()= ShowInfo(
         id = show?.id ?: 0,
         name = show?.name ?: "",
         score = score ?: 0.0,
@@ -159,6 +159,7 @@ data class SearchInfoDto(
         rating = show?.rating?.average ?: 0.0,
         imdb = if(show?.externals?.imdb != null) "https://www.imdb.com/title/${show.externals.imdb}" else "",
         averageRuntime = show?.averageRuntime ?: 0,
-        officialSite = show?.officialSite ?: ""
+        officialSite = show?.officialSite ?: "",
+        genres= show?.genres?.filterNotNull() ?: listOf()
     )
 }

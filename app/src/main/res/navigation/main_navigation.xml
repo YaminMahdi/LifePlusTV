@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_navLogin_to_navHome"
             app:destination="@id/navHome" />
+        <action
+            android:id="@+id/action_navLogin_to_navRegistration"
+            app:destination="@id/navRegistration" />
     </fragment>
 
     <fragment
@@ -24,5 +27,30 @@
         <action
             android:id="@+id/action_navHome_to_navLogin"
             app:destination="@id/navLogin" />
+        <action
+            android:id="@+id/action_navHome_to_navProfile"
+            app:destination="@id/navProfile" />
+        <action
+            android:id="@+id/action_navHome_to_navShowDetails"
+            app:destination="@id/navShowDetails" />
     </fragment>
+    <fragment
+        android:id="@+id/navRegistration"
+        android:name="com.life.plus.tv.presentation.screen.RegistrationFragment"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration">
+        <action
+            android:id="@+id/action_navRegistration_to_navHome"
+            app:destination="@id/navHome" />
+    </fragment>
+    <fragment
+        android:id="@+id/navProfile"
+        android:name="com.life.plus.tv.presentation.screen.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/navShowDetails"
+        android:name="com.life.plus.tv.presentation.screen.ShowDetailsFragment"
+        android:label="fragment_show_details"
+        tools:layout="@layout/fragment_show_details" />
 </navigation>
