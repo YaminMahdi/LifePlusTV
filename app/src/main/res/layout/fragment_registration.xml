@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:maxLines="1"
-            android:text="Registration"
+            android:text="@string/registration"
             android:textColor="?colorPrimary"
             android:textSize="@dimen/_12ssp"
             android:textStyle="bold" />
@@ -38,7 +38,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_5sdp"
         android:fillViewport="true">
 
         <LinearLayout
@@ -47,12 +46,24 @@
             android:layout_marginHorizontal="@dimen/_5sdp"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:maxLines="1"
+                android:text="Fill up this form to register."
+                android:textColor="@color/blueLight"
+                android:textSize="@dimen/_11ssp"
+                android:textStyle="bold" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layoutName"
                 style="?attr/textInputOutlinedStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
                 android:autofillHints="username"
                 android:hint="@string/name"
                 app:boxBackgroundColor="@color/white"
@@ -84,6 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
                 android:autofillHints="username"
                 android:hint="@string/user_name"
                 app:boxBackgroundColor="@color/white"
@@ -117,6 +129,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
                 android:autofillHints="username"
                 android:hint="@string/phone_number"
                 app:boxBackgroundColor="@color/white"
@@ -151,6 +164,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
                 android:autofillHints="password"
                 android:hint="@string/password"
                 app:boxBackgroundColor="@color/white"
@@ -184,6 +198,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
                 android:autofillHints="password"
                 android:hint="@string/confirm_password"
                 app:boxBackgroundColor="@color/white"
@@ -224,7 +239,7 @@
                     android:layout_marginHorizontal="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_30sdp"
                     android:layout_marginBottom="@dimen/_14sdp"
-                    android:text="@string/sign_in"
+                    android:text="@string/sign_up"
                     android:textSize="@dimen/_14ssp"
                     app:cornerRadius="16dp" />
             </FrameLayout>

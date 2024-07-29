@@ -3,19 +3,28 @@ package com.life.plus.tv.utils
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
+import coil.imageLoader
+import coil.request.ImageRequest
+import com.life.plus.tv.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -161,4 +170,55 @@ fun String.showToast(){
 fun String.isValidUsername(): Boolean {
     val regex = "^[a-zA-Z_][a-zA-Z0-9_]{1,19}$".toRegex()
     return regex.matches(this)
+}
+
+fun ImageView.loadDrawable(url: String?) {
+    val request = ImageRequest.Builder(this.context)
+        .setHeader("Cache-Control", "max-age=31536000")
+        .data(url)
+        .target(this)
+        .build()
+    context.imageLoader.enqueue(request)
+}
+
+fun View.gone(){
+    visibility = View.GONE
+}
+
+fun View.visible(){
+    visibility = View.VISIBLE
+}
+
+fun View.invisible(){
+    visibility = View.INVISIBLE
+}
+
+fun Activity.setSystemBarAppearance(
+    statusBarColor: Int,
+    navigationBarColor: Int,
+    isAppearanceLightStatusBars: Boolean,
+    isAppearanceLightNavigationBars: Boolean
+) {
+    window.statusBarColor = ContextCompat.getColor(this, statusBarColor)
+    window.navigationBarColor = ContextCompat.getColor(this, navigationBarColor)
+    val windowInsetController = WindowCompat.getInsetsController(window, window.decorView)
+    windowInsetController.isAppearanceLightStatusBars = isAppearanceLightStatusBars
+    windowInsetController.isAppearanceLightNavigationBars = isAppearanceLightNavigationBars
+}
+
+fun Activity?.setStatusAppearance(isLight: Boolean) {
+    if(this == null) return
+    val windowInsetController = WindowCompat.getInsetsController(window, window.decorView)
+    windowInsetController.isAppearanceLightStatusBars = !isLight
+}
+
+fun Activity?.closeKeyboard(nextFocus: View? = null) {
+    if(this == null) return
+    val view = currentFocus
+    if (view is EditText) {
+        val manager =
+            this.getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
+        manager.hideSoftInputFromWindow(view.getWindowToken(), 0)
+        nextFocus?.requestFocus()
+    }
 }

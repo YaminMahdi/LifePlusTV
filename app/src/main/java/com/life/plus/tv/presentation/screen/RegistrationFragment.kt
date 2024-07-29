@@ -1,14 +1,11 @@
 package com.life.plus.tv.presentation.screen
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -38,18 +35,10 @@ class RegistrationFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        setupUI()
         setupObserver()
         setupListener()
     }
 
-    private fun setupUI() {
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
-            binding.root.clipChildren = false
-            binding.root.clipToPadding = false
-            insets
-        }
-    }
 
     private fun setupObserver() {
         viewModel.regInfo.collectWithLifecycle {
@@ -75,7 +64,7 @@ class RegistrationFragment : Fragment() {
 
     private fun setupListener() {
         binding.apply {
-            listOf(layoutName, layoutUserName, layoutPhone, layoutPass, layoutRePass).forEach {txtLayout->
+            listOf(layoutName, layoutPhone, layoutPass, layoutRePass).forEach {txtLayout->
                 txtLayout.editText?.doAfterTextChanged {
                     if(txtLayout.error != null)
                         txtLayout.error = null
@@ -84,20 +73,23 @@ class RegistrationFragment : Fragment() {
             var userNameJob : Job? = null
             userName.doAfterTextChanged {
                 userNameJob?.cancel()
-                if(!it.toString().isValidUsername()){
-                    layoutUserName.error = "Invalid User Name"
-                    return@doAfterTextChanged
-                }
                 if(it.toString().isNotBlank()){
+                    if(!it.toString().isValidUsername()){
+                        layoutUserName.error = "Invalid User Name"
+                        return@doAfterTextChanged
+                    }
                     userNameJob = lifecycleScope.launch {
-                        delay(500)
-                        val isExist = viewModel.isUserNameExist(it.toString())
+                        delay(300)
+                        val isExist = viewModel.isUserExist(it.toString())
                         if(isExist)
                             layoutUserName.error = "User Name taken"
                         else
                             layoutUserName.helperText = "Available"
                     }
-                }else layoutUserName.helperText = null
+                }else {
+                    layoutUserName.error = null
+                    layoutUserName.helperText = null
+                }
             }
             btnBack.setBounceClickListener {
                 findNavController().navigateUp()

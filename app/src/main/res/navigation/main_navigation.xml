@@ -13,6 +13,8 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_navLogin_to_navHome"
+            app:popUpTo="@id/navLogin"
+            app:popUpToInclusive="true"
             app:destination="@id/navHome" />
         <action
             android:id="@+id/action_navLogin_to_navRegistration"
@@ -38,11 +40,7 @@
         android:id="@+id/navRegistration"
         android:name="com.life.plus.tv.presentation.screen.RegistrationFragment"
         android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration">
-        <action
-            android:id="@+id/action_navRegistration_to_navHome"
-            app:destination="@id/navHome" />
-    </fragment>
+        tools:layout="@layout/fragment_registration"/>
     <fragment
         android:id="@+id/navProfile"
         android:name="com.life.plus.tv.presentation.screen.ProfileFragment"

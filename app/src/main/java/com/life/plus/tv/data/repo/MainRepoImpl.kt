@@ -1,5 +1,6 @@
 package com.life.plus.tv.data.repo
 
+import android.database.SQLException
 import com.life.plus.tv.data.data_source.local.room.UserDao
 import com.life.plus.tv.data.data_source.remote.dto.SearchInfoDto
 import com.life.plus.tv.domain.ErrorType
@@ -37,10 +38,10 @@ class MainRepoImpl @Inject constructor(
 
     override suspend fun register(userInfo: UserInfo): RequestState<String> =
         withContext(Dispatchers.IO) {
-            if (userDao.addUser(userInfo.toUserEntity()) == null)
+            if (userDao.addUser(userInfo.toUserEntity()) == -1L)
                 RequestState.Error("User Name already taken", ErrorType.InvalidUserName)
             else
-                RequestState.Success("Registration Successful")
+                RequestState.Success("Successful, try to login")
         }
 
 

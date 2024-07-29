@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.life.plus.tv.R
 import com.life.plus.tv.databinding.FragmentLoginBinding
+import com.life.plus.tv.domain.ErrorType
 import com.life.plus.tv.domain.RequestState
 import com.life.plus.tv.presentation.MainViewModel
 import com.life.plus.tv.utils.collectWithLifecycle
@@ -44,13 +45,25 @@ class LoginFragment : Fragment() {
 
     private fun setupObserver() {
         viewModel.loginInfo.collectWithLifecycle {
-            if(it is RequestState.Error)
-                it.error.showToast()
+            if(it is RequestState.Error) {
+                when(it.type){
+                    ErrorType.InvalidUserName -> binding.layoutUserName.error = it.error
+                    ErrorType.InvalidPass -> binding.layoutPass.error = it.error
+                    else -> Unit
+                }
+//                it.error.showToast()
+            }
         }
     }
 
     private fun setupListener() {
         binding.apply {
+            listOf(layoutUserName, layoutPass).forEach {txtLayout->
+                txtLayout.editText?.doAfterTextChanged {
+                    if(txtLayout.error != null)
+                        txtLayout.error = null
+                }
+            }
             btnLogin.setBounceClickListener {
                 viewModel.login(binding.userName.text.toString(), binding.pass.text.toString())
             }
@@ -58,5 +71,10 @@ class LoginFragment : Fragment() {
                 findNavController().navigateSafe(R.id.action_navLogin_to_navRegistration)
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.keepSplashScreen = false
     }
 }

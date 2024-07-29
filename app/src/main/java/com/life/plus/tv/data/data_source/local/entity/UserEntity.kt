@@ -6,7 +6,7 @@ import com.life.plus.tv.domain.model.UserInfo
 
 @Entity(tableName = "user_data")
 data class UserEntity(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey
     val userName: String = "",
     val name: String = "",
     val phone: String = "",

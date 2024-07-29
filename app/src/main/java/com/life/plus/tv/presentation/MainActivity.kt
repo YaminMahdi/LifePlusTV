@@ -16,15 +16,14 @@ import com.life.plus.tv.databinding.ActivityMainBinding
 import com.life.plus.tv.utils.collectWithLifecycle
 import com.life.plus.tv.utils.navigateSafe
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var splashScreen: SplashScreen
     private val viewModel by viewModels<MainViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
-        splashScreen = installSplashScreen()
-        splashScreen.setKeepOnScreenCondition { true }
+        installSplashScreen().setKeepOnScreenCondition { viewModel.keepSplashScreen }
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -43,24 +42,28 @@ class MainActivity : AppCompatActivity() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
-            v.setPaddingRelative(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom + ime.bottom)
+            val isImeVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
+            val bottom = if (isImeVisible) ime.bottom else systemBars.bottom
+            v.setPaddingRelative(systemBars.left, systemBars.top, systemBars.right, bottom)
             insets
         }
     }
 
     private fun setupObserver() {
         var userNull = null
-        viewModel.currentUser.collectWithLifecycle {
-            splashScreen.setKeepOnScreenCondition { false }
-            if(it != null)
-                findNavController(R.id.main_nav_host).navigateSafe(R.id.action_navLogin_to_navHome)
-            else
-                findNavController(R.id.main_nav_host).navigateSafe(R.id.action_navHome_to_navLogin)
-        }
+        viewModel.currentUser
+            .distinctUntilChanged()
+            .collectWithLifecycle {
+                if(it != null)
+                    findNavController(R.id.main_nav_host).navigateSafe(R.id.action_navLogin_to_navHome)
+                else {
+                    viewModel.keepSplashScreen = false
+                    findNavController(R.id.main_nav_host).navigateSafe(R.id.action_navHome_to_navLogin)
+                }
+            }
     }
 
     private fun setupListener() {
     }
-
 
 }
