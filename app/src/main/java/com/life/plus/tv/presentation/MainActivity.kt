@@ -28,20 +28,16 @@ class MainActivity : AppCompatActivity() {
 
         setupUI()
         setupObserver()
-        setupListener()
 
     }
 
     private fun setupUI() {
-//        ViewCompat.getRootWindowInsets(binding.root)?.getInsets(WindowInsetsCompat.Type.systemBars())?.let { systemBars->
-//            binding.root.setPaddingRelative(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//        }
-        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
+        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             val ime = insets.getInsets(WindowInsetsCompat.Type.ime())
             val isImeVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
             val bottom = if (isImeVisible) ime.bottom else systemBars.bottom
-            v.setPaddingRelative(systemBars.left, systemBars.top, systemBars.right, bottom)
+            binding.root.setPadding(systemBars.left, systemBars.top, systemBars.right, bottom)
             insets
         }
     }
@@ -57,9 +53,6 @@ class MainActivity : AppCompatActivity() {
                     findNavController(R.id.main_nav_host).navigateSafe(R.id.action_navHome_to_navLogin)
                 }
             }
-    }
-
-    private fun setupListener() {
     }
 
 }

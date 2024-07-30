@@ -1,7 +1,7 @@
 package com.life.plus.tv.data.repo
 
 import com.life.plus.tv.data.data_source.local.room.UserDao
-import com.life.plus.tv.data.data_source.remote.dto.SearchInfoDto
+import com.life.plus.tv.data.data_source.remote.dto.ShowInfoDto
 import com.life.plus.tv.domain.ErrorType
 import com.life.plus.tv.domain.RequestState
 import com.life.plus.tv.domain.model.ShowInfo
@@ -38,7 +38,7 @@ class MainRepoImpl @Inject constructor(
     override suspend fun register(userInfo: UserInfo): RequestState<String> =
         withContext(Dispatchers.IO) {
             if (userDao.addUser(userInfo.toUserEntity()) == -1L)
-                RequestState.Error("User Name already taken", ErrorType.InvalidUserName)
+                RequestState.Error("❌ User Name already taken", ErrorType.InvalidUserName)
             else
                 RequestState.Success("Successful, try to login")
         }
@@ -59,7 +59,7 @@ class MainRepoImpl @Inject constructor(
                 val response = ktorClient.get("search/shows?q=$query")
                 if (response.status.isSuccess()) {
                     val body = response
-                        .body<List<SearchInfoDto>>()
+                        .body<List<ShowInfoDto>>()
                         .map { it.toShowInfo() }
                     RequestState.Success(body)
                 } else

@@ -82,9 +82,9 @@ class RegistrationFragment : Fragment() {
                         delay(300)
                         val isExist = viewModel.isUserExist(it.toString())
                         if(isExist)
-                            layoutUserName.error = "User Name taken"
+                            layoutUserName.error = "❌ User Name taken"
                         else
-                            layoutUserName.helperText = "Available"
+                            layoutUserName.helperText = "✔ User Name Available"
                     }
                 }else {
                     layoutUserName.error = null

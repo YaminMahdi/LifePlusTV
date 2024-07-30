@@ -35,6 +35,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModel.keepSplashScreen = false
         container?.clipChildren = false
         container?.clipToPadding = false
         binding = FragmentHomeBinding.inflate(inflater, container, false)

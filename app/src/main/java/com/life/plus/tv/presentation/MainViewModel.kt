@@ -71,8 +71,7 @@ class MainViewModel @Inject constructor(
         searchJob?.cancel()
         searchJob = viewModelScope.launch {
             delay(300)
-            val result = repo.getShows(query)
-            when (result) {
+            when (val result = repo.getShows(query)) {
                 is RequestState.Success -> savedStateHandle["searchList"] = result.data
                 is RequestState.Error -> error(result.error)
                 else -> Unit

@@ -71,9 +71,4 @@ class LoginFragment : Fragment() {
             }
         }
     }
-
-    override fun onPause() {
-        super.onPause()
-        viewModel.keepSplashScreen = false
-    }
 }

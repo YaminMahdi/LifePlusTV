@@ -4,7 +4,7 @@ package com.life.plus.tv.data.data_source.remote.dto
 import com.google.gson.annotations.SerializedName
 import com.life.plus.tv.domain.model.ShowInfo
 
-data class SearchInfoDto(
+data class ShowInfoDto(
     @SerializedName("score")
     val score: Double? = null, // 1.2034719
     @SerializedName("show")
@@ -148,7 +148,7 @@ data class SearchInfoDto(
     fun toShowInfo()= ShowInfo(
         id = show?.id ?: 0,
         name = show?.name ?: "",
-        score = score ?: 0.0,
+        score = score?.times(10) ?: 0.0,
         url = show?.url ?: "",
         language = show?.language ?: "",
         country = show?.network?.country?.name ?: "",
