@@ -19,3 +19,5 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keepclassmembers, allowoptimization class com.life.plus.tv.data.data_source.local.room.UserDatabase_Impl { <init>(); }

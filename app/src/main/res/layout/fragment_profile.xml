@@ -1,14 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".presentation.screen.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8sdp">
 
-</FrameLayout>
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_special_bg"
+            android:contentDescription="@string/logo"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="?colorPrimary" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:maxLines="1"
+            android:text="@string/profile"
+            android:textColor="?colorPrimary"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_25sdp"
+        android:layout_marginVertical="@dimen/_15sdp">
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.Material3.CardView.Filled"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            app:cardBackgroundColor="@color/whiteTrans"
+            app:cardCornerRadius="@dimen/_40sdp">
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/_10sdp"
+                android:contentDescription="@string/logo"
+                android:src="@drawable/ic_profile"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="#DC6D6D6D" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold"
+                tools:text="@tools:sample/full_names" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_7sdp"
+                android:gravity="center"
+                android:text="@string/admin"
+                android:textColor="@color/lightGray"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        app:dividerColor="#90A3ADBC" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_25sdp"
+        android:layout_marginVertical="@dimen/_15sdp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/_10sdp"
+            android:gravity="center"
+            android:textColor="@color/lightGray"
+            android:textSize="@dimen/_12ssp"
+            app:drawableStartCompat="@drawable/ic_person"
+            tools:text="yamin_khan" />
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_14sdp"
+            android:drawablePadding="@dimen/_10sdp"
+            android:gravity="center"
+            android:textColor="@color/lightGray"
+            android:textSize="@dimen/_12ssp"
+            app:drawableStartCompat="@drawable/ic_call"
+            tools:text="01989601230" />
+
+    </LinearLayout>
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        app:dividerColor="#90A3ADBC" />
+
+    <TextView
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_18sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/btn_special_bg"
+        android:drawablePadding="@dimen/_10sdp"
+        android:gravity="center"
+        android:padding="@dimen/_10sdp"
+        android:textColor="#FF4B4B"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_logout"
+        android:text="@string/log_out" />
+
+
+</LinearLayout>

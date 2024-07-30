@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.life.plus.tv.R
 import com.life.plus.tv.databinding.FragmentHomeBinding
 import com.life.plus.tv.presentation.MainViewModel
-import com.life.plus.tv.presentation.ShowAdapter
+import com.life.plus.tv.presentation.adapter.ShowAdapter
 import com.life.plus.tv.utils.closeKeyboard
 import com.life.plus.tv.utils.collectWithLifecycle
 import com.life.plus.tv.utils.gone
@@ -27,9 +27,11 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel by activityViewModels<MainViewModel>()
-    private val showAdapter by lazy { ShowAdapter(onItemClick = {
-        findNavController().navigateSafe(R.id.action_navHome_to_navShowDetails)
-    }) }
+    private val showAdapter by lazy {
+        ShowAdapter(onItemClick = {
+            viewModel.currentItem = it
+            findNavController().navigateSafe(R.id.action_navHome_to_navShowDetails)
+        }) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +54,6 @@ class HomeFragment : Fragment() {
         binding.root.clipChildren = false
         binding.root.clipToPadding = false
         binding.searchRecyclerView.adapter = showAdapter
-        activity.setStatusAppearance(isLight = true)
     }
 
     private fun setupObserver() {
@@ -93,7 +94,7 @@ class HomeFragment : Fragment() {
     private fun setupListener() {
         binding.apply {
             btnProfile.setBounceClickListener {
-                viewModel.logout()
+                findNavController().navigateSafe(R.id.action_navHome_to_navProfile)
             }
         }
     }
@@ -101,6 +102,11 @@ class HomeFragment : Fragment() {
     override fun onPause() {
         super.onPause()
         activity.setStatusAppearance(isLight = false)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity.setStatusAppearance(isLight = true)
     }
 
 }

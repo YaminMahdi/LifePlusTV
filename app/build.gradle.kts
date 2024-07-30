@@ -26,8 +26,15 @@ android {
     }
 
     buildTypes {
+//        debug {
+//            isDebuggable = false
+//            isMinifyEnabled = true
+//            isShrinkResources = true
+//            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+//        }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -67,6 +74,7 @@ dependencies {
 
     //ktor
     implementation(libs.bundles.ktor)
+    implementation(libs.gson)
 
     //google official splashscreen
     implementation(libs.androidx.core.splashscreen)

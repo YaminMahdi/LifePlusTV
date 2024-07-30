@@ -1,4 +1,4 @@
-package com.life.plus.tv.presentation
+package com.life.plus.tv.presentation.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

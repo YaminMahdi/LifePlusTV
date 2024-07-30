@@ -1,14 +1,408 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".presentation.screen.ShowDetailsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8sdp">
 
-</FrameLayout>
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_special_bg"
+            android:contentDescription="@string/logo"
+            android:padding="@dimen/_8sdp"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="?colorPrimary" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:maxLines="1"
+            android:text="@string/show_details"
+            android:textColor="?colorPrimary"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold" />
+
+    </FrameLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Material3.CardView.Filled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:cardBackgroundColor="@color/whiteTrans">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginVertical="@dimen/_5sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_2ssp"
+                        android:text="@string/premiered"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_10ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/time"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/_2ssp"
+                        android:layout_weight="1"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_10ssp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@tools:sample/date/ddmmyy" />
+
+                    <TextView
+                        android:id="@+id/rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_11ssp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_star_big"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:text="5.6" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="@dimen/_1ssp"
+                        android:layout_marginBottom="2.15dp"
+                        android:text="@string/_10"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_9ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/rate" />
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_280sdp"
+                android:layout_marginHorizontal="@dimen/_50sdp"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:strokeWidth="0dp">
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="@color/blueLightMore"
+                    android:contentDescription="@string/logo"
+                    android:scaleType="centerCrop"
+                    tools:src="@tools:sample/backgrounds/scenic" />
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Material3.CardView.Filled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_10sdp"
+                app:cardBackgroundColor="@color/whiteTrans">
+
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Widget.Material3.CardView.Filled"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_margin="@dimen/_6sdp"
+                    app:cardBackgroundColor="@color/blueLightMore">
+
+                    <TextView
+                        android:id="@+id/watchTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_5sdp"
+                        android:layout_marginHorizontal="@dimen/_10sdp"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:gravity="center"
+                        tools:text=": 30 Min"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/_9ssp"
+                        android:textStyle="bold"
+                        app:drawableStartCompat="@drawable/ic_cam"
+                        app:layout_constraintEnd_toStartOf="@+id/time"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginVertical="@dimen/_5sdp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_2ssp"
+                        android:layout_marginBottom="1dp"
+                        android:text="@string/name_cln"
+                        android:textColor="@color/blueLight"
+                        android:textSize="@dimen/_8ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/rate" />
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_2ssp"
+                        android:ellipsize="end"
+                        android:maxWidth="@dimen/_180sdp"
+                        android:maxLines="3"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/time"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@tools:sample/lorem/random" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/genreRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_10sdp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_genre" />
+
+                    <TextView
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="@dimen/_2ssp"
+                        android:layout_marginBottom="1dp"
+                        android:text="@string/summary"
+                        android:textColor="@color/blueLight"
+                        android:textSize="@dimen/_8ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/rate" />
+
+                    <TextView
+                        android:id="@+id/summary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/_2ssp"
+                        android:ellipsize="end"
+                        android:textColor="@color/gray"
+                        android:textSize="@dimen/_10ssp"
+                        app:layout_constraintEnd_toStartOf="@+id/time"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@tools:sample/lorem/random" />
+
+
+                    <LinearLayout
+                        android:layout_width="@dimen/_130sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_5sdp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/tvmaze_score"
+                                android:textColor="@color/blue"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@+id/time"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/score"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_2ssp"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:textColor="@color/gray"
+                                android:textSize="@dimen/_10ssp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="2.65" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/language"
+                                android:textColor="@color/blue"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@+id/time"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/language"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_2ssp"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:textColor="@color/gray"
+                                android:textSize="@dimen/_10ssp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="Bangla" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/country"
+                                android:textColor="@color/blue"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@+id/time"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/country"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_2ssp"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:textColor="@color/gray"
+                                android:textSize="@dimen/_10ssp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="Japan" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="@string/see_more_details_on"
+                        android:textColor="@color/blueLight"
+                        android:textSize="@dimen/_8ssp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/time"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:clipToPadding="false"
+                        android:padding="4dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/btnImdb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:foreground="?selectableItemBackground"
+                            app:cardCornerRadius="5dp">
+
+                            <ImageView
+                                android:layout_width="56dp"
+                                android:layout_height="match_parent"
+                                android:contentDescription="@string/logo"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_imdb" />
+                        </androidx.cardview.widget.CardView>
+
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/btnTvMaze"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:foreground="?selectableItemBackground"
+                            app:cardCornerRadius="5dp">
+
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:contentDescription="@string/logo"
+                                android:scaleType="centerCrop"
+                                android:scaleX="1.3"
+                                android:scaleY="1.5"
+                                android:src="@drawable/ic_tvmaze" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/btnWeb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:foreground="?selectableItemBackground"
+                            app:cardCornerRadius="5dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:contentDescription="@string/logo"
+                                android:src="@drawable/ic_web" />
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

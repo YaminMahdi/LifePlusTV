@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                     findNavController(R.id.main_nav_host).navigateSafe(R.id.action_navLogin_to_navHome)
                 else {
                     viewModel.keepSplashScreen = false
-                    findNavController(R.id.main_nav_host).navigateSafe(R.id.action_navHome_to_navLogin)
+                    findNavController(R.id.main_nav_host).navigateSafe(R.id.action_navProfile_to_navLogin)
                 }
             }
     }

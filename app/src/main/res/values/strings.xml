@@ -17,4 +17,14 @@
     <string name="premiered">Premiered:</string>
     <string name="fill_up_this_form_to_register">Fill up this form to register.</string>
     <string name="tv">TV</string>
+    <string name="profile">Profile</string>
+    <string name="show_details">Show Details</string>
+    <string name="see_more_details_on">See more details on:</string>
+    <string name="tvmaze_score">TvMaze Score:</string>
+    <string name="country">Country:</string>
+    <string name="language">Language:</string>
+    <string name="summary">Summary:</string>
+    <string name="name_cln">Name:</string>
+    <string name="admin">Admin</string>
+    <string name="log_out">Log out</string>
 </resources>

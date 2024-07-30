@@ -34,6 +34,12 @@ class MainViewModel @Inject constructor(
 
     val searchList = savedStateHandle.getStateFlow<List<ShowInfo>?>("searchList", null)
 
+    var currentItem: ShowInfo?
+        get() = savedStateHandle["currentItem"]
+        set(showInfo) {
+            savedStateHandle["currentItem"]= showInfo
+        }
+
     init {
         viewModelScope.launch {
             repo.getLoggedInUser().collect{
